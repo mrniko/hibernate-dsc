@@ -46,21 +46,22 @@ Note: you can use any other cache factory not only org.hibernate.cache.infinispa
     @Configuration
     public class QueryCacheListenerConfig {
 
-	@Bean
-	public QueryCacheEntityListener createCacheListener() {
-		return new QueryCacheEntityListener();		
-	}
+        @Bean
+        public QueryCacheEntityListener createCacheListener() {
+                return new QueryCacheEntityListener();		
+        }
 	
         @PostConstruct
         protected void init() {
 
-                // register hibernate-dsc QueryCacheEntityListener
+                // register hibernate dynamic cache listener
+                // QueryCacheEntityListener
 
-		EventListenerRegistry registry = sessionFactory.getServiceRegistry().getService(EventListenerRegistry.class);
-		registry.getEventListenerGroup(EventType.POST_UPDATE).appendListener(createCacheListener());
-		registry.getEventListenerGroup(EventType.POST_INSERT).appendListener(createCacheListener());
-		registry.getEventListenerGroup(EventType.POST_DELETE).appendListener(createCacheListener());
-	}
+                EventListenerRegistry registry = sessionFactory.getServiceRegistry().getService(EventListenerRegistry.class);
+                registry.getEventListenerGroup(EventType.POST_UPDATE).appendListener(createCacheListener());
+                registry.getEventListenerGroup(EventType.POST_INSERT).appendListener(createCacheListener());
+                registry.getEventListenerGroup(EventType.POST_DELETE).appendListener(createCacheListener());
+        }
 
     }
 
