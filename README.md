@@ -4,6 +4,7 @@ Dynamic Sql Cache module for [Hibernate 4+](http://hibernate.org).
 
 This project used by author in several projects some of them high loaded systems.
 The reason to create it is inefficient Hibernate query caching mechanism:
+
 1. HQL-cache including entity-collections cache, clearing on every UPDATE, INSERT or DELETE performed on any entity-table used in hql-query or entity-collection.
 It nullifies the benefits of using HQL-cache and entity-collection cache in high loaded systems.
 2. SQL-cache holds result of first query invocation only and holds it forever, there is no way to reset it.
@@ -11,6 +12,7 @@ It nullifies the benefits of using HQL-cache and entity-collection cache in high
 Therefore idea to create dynamic updatable SQL-cache was born.
 Query cache result updates on every INSERT or DELETE operation for entity-table used in SQL-query.
 To take advantage of dynamic sql cache you should change your look towards sql-query creation, and use sql-queries instead of any entity-collections too:
+
 1. Query should result only entity ID, because you can always load it from entity-cache by ID.
    (Two cache read operations much faster than database reading operation)
 2. Use only immutable properties of entity as query parameters.               
@@ -41,16 +43,16 @@ Somethere in hibernate.cfg.xml
 Note: you can use any other cache factory not only org.hibernate.cache.infinispan.InfinispanRegionFactory
 
 
-@Configuration
-public class QueryCacheListenerConfig {
+  @Configuration
+  public class QueryCacheListenerConfig {
 
 	@Bean
 	public QueryCacheEntityListener createCacheListener() {
 		return new QueryCacheEntityListener();		
 	}
 	
-	@PostConstruct
-	protected void init() {
+        @PostConstruct
+        protected void init() {
 
                 // register hibernate-dsc QueryCacheEntityListener
 
@@ -60,12 +62,12 @@ public class QueryCacheListenerConfig {
 		registry.getEventListenerGroup(EventType.POST_DELETE).appendListener(createCacheListener());
 	}
 
-}
+  }
 
 
 
-@Service
-public class SimpleEntityDao {
+  @Service
+  public class SimpleEntityDao {
 
         private final String queryRegionName = "SimpleEntity_Query";
         private final String query = "SELECT id FROM SimpleEntity WHERE phone = :phone";
@@ -76,7 +78,7 @@ public class SimpleEntityDao {
         private SessionFactory sessionFactory;
 
         @PostConstruct
-	protected void init() {
+        protected void init() {
 
                 // here is our cache callback
                 // invokes on every "insert" or "delete" operation 
@@ -111,7 +113,7 @@ public class SimpleEntityDao {
         
         create, delete methods...
 
-}	
+  }	
 
 
 
