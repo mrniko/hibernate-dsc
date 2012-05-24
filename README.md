@@ -25,7 +25,7 @@ Licensed under the Apache License 2.0.
 ### Features
 
 * Compatible with any cache provider (EHCache, Infinispan, Hazelcast ...)
-
+* Test cases included
 
 
 #Usage example
