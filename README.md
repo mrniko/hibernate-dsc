@@ -9,6 +9,8 @@ The reason to create it is inefficient Hibernate query caching mechanism:
 It nullifies the benefits of using HQL-cache and entity-collection cache in high loaded systems.
 2. SQL-cache holds result of first query invocation only and holds it forever, there is no way to reset it.
 
+
+
 Therefore idea to create dynamic updatable SQL-cache was born.
 Query cache result updates on every INSERT or DELETE operation for entity-table used in SQL-query.
 To take advantage of dynamic sql cache you should change your look towards sql-query creation, and use sql-queries instead of any entity-collections too:
@@ -19,6 +21,12 @@ To take advantage of dynamic sql cache you should change your look towards sql-q
 3. Use sql-query with dynamic cache instead of any entity-collections.
 
 Licensed under the Apache License 2.0.
+
+### Features
+
+* Compatible with any cache provider (EHCache, Infinispan, Hazelcast ...)
+
+
 
 #Usage example
 
