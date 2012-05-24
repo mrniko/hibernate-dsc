@@ -43,8 +43,8 @@ Somethere in hibernate.cfg.xml
 Note: you can use any other cache factory not only org.hibernate.cache.infinispan.InfinispanRegionFactory
 
 
-  @Configuration
-  public class QueryCacheListenerConfig {
+    @Configuration
+    public class QueryCacheListenerConfig {
 
 	@Bean
 	public QueryCacheEntityListener createCacheListener() {
@@ -62,12 +62,12 @@ Note: you can use any other cache factory not only org.hibernate.cache.infinispa
 		registry.getEventListenerGroup(EventType.POST_DELETE).appendListener(createCacheListener());
 	}
 
-  }
+    }
 
 
 
-  @Service
-  public class SimpleEntityDao {
+    @Service
+    public class SimpleEntityDao {
 
         private final String queryRegionName = "SimpleEntity_Query";
         private final String query = "SELECT id FROM SimpleEntity WHERE phone = :phone";
@@ -113,7 +113,7 @@ Note: you can use any other cache factory not only org.hibernate.cache.infinispa
         
         create, delete methods...
 
-  }	
+    }	
 
 
 
