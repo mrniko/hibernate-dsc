@@ -66,7 +66,7 @@ Note: you can use any other cache factory not only org.hibernate.cache.infinispa
     }
 
 
-    Entity DAO example:
+Entity DAO example:
  
 
     @Service
