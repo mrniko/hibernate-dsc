@@ -1,4 +1,4 @@
-#Overview
+#Hibernate Dynamic SQL Cache Overview
 
 Dynamic Sql Cache module for [Hibernate 4+](http://hibernate.org).
 
