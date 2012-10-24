@@ -2,23 +2,22 @@
 
 Dynamic Sql Cache module for [Hibernate 4+](http://hibernate.org).
 
-This project used by author in several projects some of them high loaded systems.
-The reason to create it is inefficient Hibernate query caching mechanism:
+This project used by author in several projects some of them under heavy load.
+Inefficient Hibernate query caching mechanism is the reason to create this project. Key disadvantages of Hibernate caching system:
 
-1. HQL-cache including entity-collections cache, clearing on every UPDATE, INSERT or DELETE performed on any entity-table used in hql-query or entity-collection.
-It nullifies the benefits of using HQL-cache and entity-collection cache in high loaded systems.
+1. HQL-cache (including entity-collections cache) clears on every UPDATE, INSERT or DELETE operation performed on any entity-table included in hql-query or entity-collection.
+This nullifies the benefits of using HQL-cache and entity-collection cache in case of huge amount of queries.
 2. SQL-cache holds result of first query invocation only and holds it forever, there is no way to reset it.
 
 
 
-Therefore idea to create dynamic updatable SQL-cache was born.
-Query cache result updates on every INSERT or DELETE operation for entity-table used in SQL-query.
-To take advantage of dynamic sql cache you should change your look towards sql-query creation, and use sql-queries instead of any entity-collections too:
+This project implements dynamic sql-query caching by updating results on every INSERT or DELETE operation for entity-table used in SQL-query.
+To take advantage of dynamic sql cache you should change your look towards sql-query creation:
 
-1. Query should result only entity ID, because you can always load it from entity-cache by ID.
-   (Two cache read operations much faster than database reading operation)
+1. Query should return only entity ID, because you can always load it from entity-cache by ID.
+   (Two cache read operations much faster than database READ operation)
 2. Use only immutable properties of entity as query parameters.               
-3. Use sql-query with dynamic cache instead of any entity-collections.
+3. Use dynamic sql-query cache instead of any entity-collections.
 
 Licensed under the Apache License 2.0.
 
