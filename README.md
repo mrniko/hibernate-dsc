@@ -2,10 +2,10 @@
 
 Dynamic Sql Cache module for [Hibernate 4+](http://hibernate.org).
 
-This project used by author in several projects some of them under heavy load.
-Inefficient Hibernate query caching mechanism is the reason to create this project. Key disadvantages of Hibernate caching system:
+The module has been succesfully used in number of projects those running under heavy load.
+The reason to create this project is inefficient Hibernate query caching mechanism. Key disadvantages of Hibernate caching system:
 
-1. HQL-cache (including entity-collections cache) clears on every UPDATE, INSERT or DELETE operation performed on any entity-table included in hql-query or entity-collection.
+1. Any (INSERT, UPDATE, DELETE) operation runned on any Entity-table clears hql cache assigned to hql-query or entity collection.
 This nullifies the benefits of using HQL-cache and entity-collection cache in case of huge amount of queries.
 2. SQL-cache holds result of first query invocation only and holds it forever, there is no way to reset it.
 
